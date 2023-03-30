@@ -1,12 +1,26 @@
 $tablet-breakpoint: 48rem; // 768px
 $desktop-breakpoint: 80rem; // 1280px
-$body-font: "Titillium Web";
-$Instock-Black:#13182C;
-$Slate: #5C667E;
-$Graphite: #232940;
-$Green: #158463;
-$Instock-Indigo: #2E66E5;
-$Cloud: #BDC5D5;
-$Light-Grey: #F7F8F9;
-$Red: #C94515;
-$White: #FFFFFF;
+
+$button-radius: 8px;
+$card-radius: 8px;
+
+$regular-font: 400;
+$semi-bold-font: 600;
+$bold-font: 700;
+
+$body-font: 'Avenir', sans-serif;
+
+$black:#1c1c1c;
+$dark-grey: #242424;
+$medium-grey: #959595;
+$light-grey: #f3f3f3;
+$white: #FFFFFF;
+
+$dark-color: #305773;
+$medium-color: #4B87B3;
+$light-color: #66B8F2; //Primary
+$extra-list-color: #a9d8fa;
+
+$green: #158463;
+$blue: #2E66E5;
+$red: #C94515;
