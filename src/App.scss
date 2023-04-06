@@ -7,3 +7,23 @@
     margin: 0;
     padding: 0;
 }
+
+html {
+    height: 100%;
+    background-color: $light-grey;
+}
+
+body {
+    color: $black;
+    font-family: $body-font;
+    font-weight: $regular-font;
+    background-color: $light-grey;
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 5.9rem;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+}

@@ -1,0 +1,15 @@
+@use "../../styles/partials/fonts";
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.user-home-page {
+
+    &__container {
+        max-width: 80rem;
+        margin: 0 auto;
+    }
+
+    &__content {
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,18 @@
+@use "../../styles/partials/fonts";
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.footer {
+    width: 100%;
+    background-color: $light-grey;
+    position: absolute;
+    bottom: 0;
+    
+    &__text{
+        font-family: $body-font;
+        color: $medium-grey;
+        font-size: .75rem;
+        padding: 2.5rem 0 2.5rem 0;
+        text-align: center;
+    }
+}
