@@ -6,7 +6,7 @@ export default function Header() {
     return (
         <header className="header">
             <div className="header__content">
-                <Link className="header__logo" to="/">PicPinner</Link>
+                <Link className="header__logo" to="/">Photo Mapper</Link>
                 <div className="header__nav-list">
                     <NavLink
                         to="/support"

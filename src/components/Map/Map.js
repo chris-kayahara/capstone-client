@@ -18,7 +18,6 @@ export default function Map(props) {
     const [lng, setLng] = useState(5.9750);
     const [lat, setLat] = useState(51.477928);
     const [zoom, setZoom] = useState(0);
-    // const [points, setPoints] = useState([]);
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -27,8 +26,11 @@ export default function Map(props) {
             style: 'mapbox://styles/mapbox/streets-v12',
             projection: 'mercator',
             center: [lng, lat],
-            zoom: zoom
+            zoom: zoom,
+            maxZoom: 17.5,
         });
+
+        const markers = [];
 
         // add markers to map
         for (let i = 0; i < images.length; i++) {
@@ -38,11 +40,15 @@ export default function Map(props) {
             // console.log(props.imagePreviews[i]);
             // make a marker for each feature and add it to the map
             new mapboxgl.Marker(el)
-                .setLngLat([images[i].longitude, images[i].latitude])
+                .setLngLat([images[i].image_long, images[i].image_lat])
                 .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-                .setHTML(`<img src=${images[i].image_preview}/>`))
+                .setHTML(`<img class="map__marker-image" src=${images[i].image_preview}>`))
                 .addTo(map.current);
+            markers.push([images[i].image_long, images[i].image_lat]);
         }
+
+        map.current.fitBounds(markers);
+        
     });
 
     useEffect(() => {

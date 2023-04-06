@@ -17,9 +17,13 @@ export default function ImageItem(props) {
                 />
             <div className="image-item__text-container">
                 <input
+                    name="image-title[]"
+                    id="image-title"
                     className="image-item__title"
                     placeholder="Add Title"></input>
                 <textarea
+                    name="image-description[]"
+                    id="image-description"
                     className="image-item__description"
                     placeholder="Add Description"></textarea>
             </div>

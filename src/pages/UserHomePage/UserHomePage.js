@@ -7,11 +7,12 @@ import ListToolBar from "../../components/ListToolBar/ListToolBar"
 
 import './UserHomePage.scss'
 
-const userId = "2922c286-16cd-4d43-ab98-c79f698aeab0";
+// const userId = "2922c286-16cd-4d43-ab98-c79f698aeab0";
 
 const API_BASE_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:8080';
 
-export default function UserHomePage() {
+export default function UserHomePage({ setIsUserLoggedIn }) {
+    const [iat, setIat] = useState();
     
     const [user, setUser] = useState(null);
     const [documents, setDocuments] = useState([]);
@@ -19,39 +20,18 @@ export default function UserHomePage() {
     const [orderBy, setOrderBy] = useState("dec");
     const [sortBusy, setSortBusy] = useState(false);
 
-    // Function: Get documents and photos by user
-    const fetchDocuments = async () => {
-        try {
-            setSortBusy(true)
-            const documentData = await axios.get(`${API_BASE_URL}/document/user/${userId}?sort_by=${sortBy}&order_by=${orderBy}`);
-            const photoData = await axios.get(`${API_BASE_URL}/image/user/${userId}`);
 
-            // Add first three photos of each document to new document object properties: image1 image2 image3
-            documentData.data.forEach((document)=> {
-                photoData.data.forEach((photo) => {
-                    if (photo.document_id === document.id) {
-                        if (photo.image_order === 1) {
-                            document.listImage1 = photo.image_url
-                        }
-                    }
-                    if (photo.document_id === document.id) {
-                        if (photo.image_order === 2) {
-                            document.listImage2 = photo.image_url
-                        }
-                    }
-                    if (photo.document_id === document.id) {
-                        if (photo.image_order === 3) {
-                            document.listImage3 = photo.image_url
-                        }
-                    }
-                })
-            })
-            setDocuments(documentData.data);
-            setSortBusy(false);
-        } catch (error) {
-            console.log(error);
-            setSortBusy(false);
-        }
+    const logOut = () => {
+        sessionStorage.removeItem("token");
+        setIsUserLoggedIn(false);
+    };
+
+    // load user's profile
+    const token = sessionStorage.getItem("token");
+
+    if (!token) {
+        // redirect to login!?
+        logOut();
     }
 
     const handleSort = (sort_by) => {
@@ -67,16 +47,44 @@ export default function UserHomePage() {
 
     // Create useEffect to run at load
     useEffect(() => {
-        fetchDocuments();
-    }, [])
+        // fetchDocuments();
+        axios.get(`${API_BASE_URL}/image/user/`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }})
+            .then((response) => {
+                setDocuments(response.data.images)
+                const { iat } = response.data.decoded;
+                setIat(iat);
+                })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [token]);
+
+    if (!iat) {
+        return <span>Loading user's profile...</span>;
+    }
+
+    const documentData = documents.reduce(function (r, a) {
+        r[a.document_updated_at] = r[a.document_updated_at] || [];
+        r[a.document_updated_at].push(a);
+        return r;
+    }, Object.create(null));
+
+    const renderedDocuments = []
+      
+    for (const [key, value] of Object.entries(documentData)) {
+        renderedDocuments.push(value);
+    }
 
     return (
         <div className="user-home-page">
             <div className="user-home-page__container">
                 <div className="user-home-page__content">
                     <ListToolBar handleSort={handleSort}/>
-                    {documents.map((document) => {
-                        return (<DocListCard document={document} key={document.id}/>)
+                    {renderedDocuments.map((document, i) => { // Each document is an array of image objects
+                        return (<DocListCard document={document} key={i}/>)
                     })}
                 </div>
             </div>
