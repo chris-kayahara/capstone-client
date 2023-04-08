@@ -30,7 +30,6 @@ export default function LoginPage({ setIsUserLoggedIn }) {
             const { token } = response.data;
     
             // store it somewhere
-            console.log(response);
             sessionStorage.setItem("token", token);
     
             setIsUserLoggedIn(true);
@@ -50,7 +49,7 @@ export default function LoginPage({ setIsUserLoggedIn }) {
                 </label>
                 <label>
                     Password
-                    <input name="password" id="password"></input>
+                    <input type="password" name="password" id="password"></input>
                 </label>
 
                 {error && <div className="login__message">{error}</div>}

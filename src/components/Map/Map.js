@@ -31,24 +31,32 @@ export default function Map(props) {
         });
 
         const markers = [];
-
         // add markers to map
         for (let i = 0; i < images.length; i++) {
             // create a HTML element for each feature
             const el = document.createElement('div');
             el.className = 'marker';
-            // console.log(props.imagePreviews[i]);
             // make a marker for each feature and add it to the map
             new mapboxgl.Marker(el)
-                .setLngLat([images[i].image_long, images[i].image_lat])
+                .setLngLat([Number(images[i].image_long), Number(images[i].image_lat)])
                 .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-                .setHTML(`<img class="map__marker-image" src=${images[i].image_preview}>`))
+                .setHTML(`<img class="map__marker-image" src=${images[i].image_url}>`))
                 .addTo(map.current);
-            markers.push([images[i].image_long, images[i].image_lat]);
+            markers.push([Number(images[i].image_long), Number(images[i].image_lat)]);
         }
 
-        map.current.fitBounds(markers);
-        
+        const longValues = [];
+        const latValues = [];
+
+        for (let i = 0; i < markers.length; i++) {
+            longValues.push(markers[i][0]);
+            latValues.push(markers[i][1]);
+        }
+
+        const southWest = [Math.min(...longValues), Math.min(...latValues)]
+        const northEast = [Math.max(...longValues), Math.max(...latValues)]
+
+        map.current.fitBounds([southWest, northEast], {padding: 150});
     });
 
     useEffect(() => {
