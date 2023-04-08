@@ -1,14 +1,17 @@
 import placeholderImage from '../../assets/images/default-image.png'
 
-import './ImageItem.scss'
+import './ViewImageItem.scss'
 
-export default function ImageItem(props) {
+export default function ViewImageItem(props) {
 
     const onImageError = (e) => {
         e.target.src = placeholderImage
     }
     const { images } = props;
 
+    function handInputChange() {
+        
+    }
 
     return (
         <div>
@@ -25,12 +28,16 @@ export default function ImageItem(props) {
                                 name={`imageTitle${i}`}
                                 id="image-title"
                                 className="image-item__title"
-                                placeholder="Add Title"></input>
+                                placeholder="Add Title"
+                                value={images[i].image_title}
+                                onChange={handInputChange}></input>
                             <textarea
                                 name={`imageDescription${i}`}
                                 id="image-description"
                                 className="image-item__description"
-                                placeholder="Add Description"></textarea>
+                                placeholder="Add Description"
+                                value={images[i].image_description}
+                                onChange={handInputChange}></textarea>
                         </div>
                     </article>
             )})}

@@ -1,37 +1,55 @@
 import { useState, useEffect, useRef } from 'react'
-import {Route, Link, Routes, useNavigate} from 'react-router-dom';
+import {Route, Link, Routes, useNavigate, useParams} from 'react-router-dom';
 import exifr from 'exifr' // => exifr/dist/full.umd.cjs
 import axios from 'axios';
 
 import Map from '../../components/Map/Map';
 
-import './CreatePage.scss'
+import './GalleryPage.scss'
 import ImageItem from '../../components/ImageItem/ImageItem';
 const { v4: uuid } = require('uuid');
 
 const API_BASE_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:8080';
 
-export default function CreatePage() {
+export default function GalleryPage() {
+    
+    let { documentId } = useParams();
+
     const navigate = useNavigate();
 
     // load user's profile
     const token = sessionStorage.getItem("token");
+
     const formRef = useRef()
     
     const [images, setImages] = useState([]);
     const [document, setDocument] = useState(0);
 
-
-    const imageFileList = []
-
-    const [testImageFiles, setTestImageFiles] = useState();
-
     const [imageFilesUpload, setImageFilesUpload] = useState();
     const [imageSelectConfirm, setImageSelectConfirm] = useState(false);
+    const imageFileList = []
+
+    // Fetch document details to display 
+    useEffect(() => {
+        if (!documentId) {
+            return;
+        }
+        axios.get(API_BASE_URL + "/document/" + documentId)
+            .then(response => {
+                setDocument(response.data);
+            })
+            .then(response => {
+                return axios.get(API_BASE_URL + "/image/document/" + documentId)
+            })
+            .then(response => {
+                setImages(response.data);
+            })
+            .catch(error => 
+                console.log(error))
+            }, [documentId])
 
     const selectImages = (event) => {
         const imageFiles = event.target.files;
-        setTestImageFiles(event.target.files)
         const imagesToUpload = [];
 
         Array.prototype.forEach.call(imageFiles, async (image, i) => {              
@@ -59,16 +77,21 @@ export default function CreatePage() {
         });
         setImageFilesUpload(imageFileList);
         setImages(imagesToUpload);
-        console.log(imageFiles);
     };
 
     const handleOnImageSelect = (event) => {
         setImageSelectConfirm(true);
     }
 
+    function handleInputChange(event) {
+
+    }
+
     const handleOnSubmit = (event) => {
         event.preventDefault();
-        const documentId = uuid();
+        if (!documentId) {
+            documentId = uuid();
+        }
 
         const formData = new FormData(formRef.current);
         const data = Object.fromEntries(formData);
@@ -102,16 +125,12 @@ export default function CreatePage() {
             imageFormData.append('images', single_file)
         }
 
-        for (const pair of imageFormData.entries()) {
-            console.log(`${pair[0]}, ${pair[1]}`);
-          }
-
         axios.post(`${API_BASE_URL}/document`, documentData, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }})
             .then((response) => {
-                return axios.post(`${API_BASE_URL}/image`, imageFormData, {
+                axios.post(`${API_BASE_URL}/image`, imageFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -124,7 +143,7 @@ export default function CreatePage() {
         .catch(error => console.log(error));
     }
 
-    //Show preloader when no video is downloaded yet
+    //Show select images when no id is provided
     if (images.length === 0) {
         return (
             <form  action='/images' >
@@ -147,13 +166,21 @@ export default function CreatePage() {
     return (
         <div>
             <form onSubmit={handleOnSubmit} ref={formRef}>
-                <input placeholder="Enter a title for this project" name="documentTitle" id="documentTitle"></input>
-                <textarea placeholder="Enter a description for this project" name="documentDescription" id="documentDescription"></textarea>
+                <input 
+                    placeholder="Enter a title for this project" 
+                    name="documentTitle" 
+                    id="documentTitle"
+                    value={document.title}
+                    onChange={handleInputChange}></input>
+                <textarea 
+                    placeholder="Enter a description for this project" name="documentDescription" 
+                    id="documentDescription"
+                    value={document.description}
+                    onChange={handleInputChange}></textarea>
                 <Map images={images}/>
-
                 <ImageItem images={images}/>
                 <button type="submit">Save</button>
-                <button>Cancel</button>
+                <Link to='/'><button>Cancel</button></Link>
             </form>
         </div>
     )
