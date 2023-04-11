@@ -43,22 +43,20 @@ If above doesnt work try:
 
 ## Site Map <a name="map"></a>
 ```mermaid
-graph TD
+graph TB
   Header --> Home
   Header --> Sign Out
 
-  Login --> User Home Page
-  Login --> Sign Up
+  Home --> User Home Page
+  Home --> Sign Up
 
-  Sign UP --> Login
+  Sign UP --> Home
   
-  User Home Page --> Create Gallery
-  User Home Page --> View Gallery
-  User Home Page --> Delete Gallery
+  Home --> Upload
+  Home --> View Gallery
+  Home --> Delete Gallery
 
   Upload --> Create Gallery
-
-  Create Gallery --> Save Gallery to Home Page
 
 ```
 
