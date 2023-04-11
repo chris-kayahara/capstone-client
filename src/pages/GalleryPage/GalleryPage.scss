@@ -88,9 +88,11 @@
     }
 
     &__map-image-container{
+
     }
 
     &__map-container{
+        width:100% !important;
         overflow: hidden;
         border-radius: 4px;
         border: 1px solid rgba(99, 99, 99, 0.3);

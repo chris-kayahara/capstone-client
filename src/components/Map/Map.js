@@ -56,7 +56,9 @@ export default function Map(props) {
         const southWest = [Math.min(...longValues), Math.min(...latValues)]
         const northEast = [Math.max(...longValues), Math.max(...latValues)]
 
-        map.current.fitBounds([southWest, northEast], {padding: 150});
+        map.current.fitBounds([southWest, northEast], {padding: 100});
+
+        
     });
 
     useEffect(() => {
