@@ -43,14 +43,14 @@ If above doesnt work try:
 
 ## Site Map <a name="map"></a>
 ```mermaid
-graph TB
-  Header --> Home
+graph TD;
+  Header --> Home;
   
-  Home --> Upload
-  Home --> View Gallery
-  Home --> Delete Gallery
+  Home --> Upload;
+  Home --> View Gallery;
+  Home --> Delete Gallery;
 
-  Upload --> Create Gallery
+  Upload --> Create Gallery;
 
 ```
 
