@@ -45,12 +45,6 @@ If above doesnt work try:
 ```mermaid
 graph TB
   Header --> Home
-  Header --> Sign Out
-
-  Home --> User Home Page
-  Home --> Sign Up
-
-  Sign UP --> Home
   
   Home --> Upload
   Home --> View Gallery
