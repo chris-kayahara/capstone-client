@@ -42,17 +42,19 @@ If above doesnt work try:
 `node index.js`
 
 ## Site Map <a name="map"></a>
-```mermaid
-graph TD;
-  Header --> Home;
+  Header --> Home
+  Header --> Sign Out
+
+  Home --> User Home Page
+  Home --> Sign Up
+
+  Sign UP --> Home
   
-  Home --> Upload;
-  Home --> View Gallery;
-  Home --> Delete Gallery;
+  Home --> Upload
+  Home --> View Gallery
+  Homee --> Delete Gallery
 
-  Upload --> Create Gallery;
-
-```
+  Upload --> Create Gallery
 
 ## Outline <a name="outline"></a>
 Photo Mapper provides users an efficient way to compile photos with their embeded GPS data in order to display the gallery with additional usefull context. Users can upload their own images that have GPS data already embeded. With this data, Photo Mapper will plot pins on an interactive map along with the photos below with a place to add captions, and descriptions to each. These 'galleries' can then be saved to the users profile 
