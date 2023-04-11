@@ -43,7 +43,7 @@ If above doesnt work try:
 
 ## Site Map <a name="map"></a>
 ```mermaid
-graph TB
+graph TD
   Header --> Home
   Header --> Sign Out
 
