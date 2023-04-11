@@ -1,0 +1,107 @@
+@use "../../styles/partials/fonts";
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.image-select {
+    padding: 1rem;
+    max-width: 38.75rem;
+    margin: 0 auto;
+
+    &__container{
+        background-color: $white;
+        padding: 1rem;
+        border-radius: .25rem;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+    &__title{
+        margin-bottom: 1rem;
+    }
+
+    &__form{
+
+    }
+
+    &__text{
+        margin-bottom: 1rem;
+    }
+
+    &__upload-container{
+        display: flex;
+        flex-direction: column;
+        border: 3px $medium-grey dashed;
+        border-radius: .5rem;
+        padding: 1rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    &__upload-button{
+        margin: 1rem;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        background-color: $medium-color; 
+        width: 6rem;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 0.25rem;
+        margin-bottom: 1rem;
+        transition: all 0.2s ease;
+        &:hover{
+            background-color: $dark-color;
+            scale: 1.1;
+        }
+    }
+
+    &__upload-icon{
+        filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(76deg) brightness(107%) contrast(101%);
+        width: 40px;
+    }
+
+    &__file-input-label{
+        font-weight: 600;
+        height: 2.5rem;
+        cursor: pointer;
+        line-height: 2.5rem;
+        text-align: center;
+        color: $white;
+        margin: 0;
+    }
+
+    &__file-input{
+        text-align-last: center; 
+        box-shadow: none;
+        border: none;
+        width: auto;
+        margin: auto;
+        background: none;
+        outline: none;
+        padding: 0;
+
+        &:focus{
+            box-shadow: none;
+            border: none;
+
+        }
+    }
+
+    &__button{
+        width: 100%;
+        margin-top: 0
+    }
+
+    &__cancel-button{
+        margin-top: .75rem;
+        margin-bottom: 0;
+        font-weight: 400;
+        font-size: 1rem;
+        width: 100%;
+        background-color: $white;
+        color: $medium-color;
+        border: $medium-color 1px solid;
+        &:hover{
+            background-color: $dark-color-pale;
+        }
+    }
+}

@@ -1,8 +1,9 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import './Header.scss'
 
-export default function Header({ setIsUserLoggedIn }) {
+export default function Header({ isUserLoggedIn, setIsUserLoggedIn }) {
 
     const navigate = useNavigate();
 
@@ -15,14 +16,16 @@ export default function Header({ setIsUserLoggedIn }) {
         navigate("/");
     };
 
-    return (
-        <header className="header">
+        return (
+            <header className="header">
             <div className="header__content">
                 <Link className="header__logo" to="/">Photo Mapper</Link>
-                <div onClick={logOut}>
-                    Log Out
-                </div>
+                { isUserLoggedIn === true ? 
+                                <div className="header__logout" onClick={logOut}>
+                                Sign Out
+                            </div> : <></>}
+
             </div>
         </header>
-    )
+        )
 }

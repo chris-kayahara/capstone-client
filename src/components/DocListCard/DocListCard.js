@@ -29,29 +29,35 @@ export default function DocListCard(props) {
 
     return (
         <article className="doc-list-card">
-            <div className="doc-list-card__content-container">
+            <div className="doc-list-card__header-container">
                 <h2 className="doc-list-card__title">{title}</h2>
-                <p className="doc-list-card__date">Created: {date}</p>
-                <p className="doc-list-card__description">{description}</p>
+                <div className="doc-list-card__button-container">
+                    <div className="doc-list-card__button">
+                        <img className="doc-list-card__icon" onClick={handleView} src={viewIcon} alt="view icon"/>
+                    </div>
+                    {/* <div className="doc-list-card__button">
+                        <img className="doc-list-card__icon" src={editIcon} alt="edit icon"/>
+                    </div> */}
+                    <div className="doc-list-card__button">
+                        <img className="doc-list-card__icon" src={shareIcon} alt="share icon"/>
+                    </div>
+                    <div className="doc-list-card__button" onClick={handleDelete}>
+                        <img className="doc-list-card__icon" src={deleteIcon} alt="delete icon"/>
+                    </div>
+                </div>
+            </div>
+            <div className="doc-list-card__info">
+                <div className="doc-list-card__text-container">
+                    <div className="doc-list-card__data-container">
+                        <p className="doc-list-card__date">Created: {date}</p>
+                        <p className="doc-list-card__count">Count: {props.document.length} images</p>
+                    </div>
+                    <p className="doc-list-card__description">{description}</p>
+                </div>
                 <div className="doc-list-card__image-container">
                     <img className="doc-list-card__image" src={listImage1} alt="preview"/>
                     <img className="doc-list-card__image" src={listImage2} alt="preview"/>
                     <img className="doc-list-card__image" src={listImage3} alt="preview"/>
-                </div>
-            </div>
-            <div className="doc-list-card__button-container">
-                <div className="doc-list-card__button">
-                    <img className="doc-list-card__icon" onClick={handleView} src={viewIcon} alt="view icon"/>
-                </div>
-                {/* <div className="doc-list-card__button">
-                    <img className="doc-list-card__icon" src={editIcon} alt="edit icon"/>
-                </div> */}
-                <div className="doc-list-card__button">
-                    <img className="doc-list-card__icon" src={shareIcon} alt="share icon"/>
-                </div>
-
-                <div className="doc-list-card__button" onClick={handleDelete}>
-                    <img className="doc-list-card__icon" src={deleteIcon} alt="delete icon"/>
                 </div>
             </div>
         </article>

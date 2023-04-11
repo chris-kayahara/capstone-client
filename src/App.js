@@ -10,7 +10,7 @@ import ViewPage from './pages/ViewPage/ViewPage';
 import Footer from './components/Footer/Footer';
 
 import './App.scss';
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
 
@@ -22,7 +22,7 @@ function App() {
   return isUserLoggedIn ? (
     <main className="App">
       <BrowserRouter>
-        <Header setIsUserLoggedIn={setIsUserLoggedIn}/>
+        <Header setIsUserLoggedIn={setIsUserLoggedIn} isUserLoggedIn={isUserLoggedIn}/>
         <Routes>
           <Route path='/' element={<UserHomePage setIsUserLoggedIn={setIsUserLoggedIn}/>}></Route>
           <Route path='/gallery' element={<GalleryPage/>}></Route>
@@ -33,9 +33,9 @@ function App() {
     </main>
   ) : (
       <BrowserRouter>
-        <Header/>
+        <Header setIsUserLoggedIn={setIsUserLoggedIn} isUserLoggedIn={isUserLoggedIn}/>
         <Routes>
-          <Route path='/' element={<LoginPage setIsUserLoggedIn={setIsUserLoggedIn}/>}></Route>
+          <Route path='/' element={<LoginPage setIsUserLoggedIn={setIsUserLoggedIn} isUserLoggedIn={isUserLoggedIn}/>}></Route>
           <Route path='/signup' element={<SignUpPage/>}></Route>
           <Route path='/gallery' element={<div>Please login</div>}></Route>
           <Route path='/*' element={<div>404: Page Not Found</div>}></Route>
