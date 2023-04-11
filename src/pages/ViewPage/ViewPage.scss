@@ -1,0 +1,38 @@
+@use "../../styles/partials/fonts";
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.loader {
+
+    &__container{
+        margin: 0 auto;
+        margin-top: 5rem;
+        width: 7.5rem;
+    }
+
+    &__loader{
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid $medium-color;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+    }
+
+    &__text{
+        margin-top: 2rem;
+        text-align: center;
+    }
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

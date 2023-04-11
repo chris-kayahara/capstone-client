@@ -23,13 +23,13 @@ const DeleteDocumentModal = ({ closeModal, id, name }) => {
         <div className="modal">
             <div className="modal__container">
             <div className="modal__container__title"> 
-                <h1 className='modal__container__heading'>Delete {name} document?</h1>
+                <h1 className='modal__container__heading'>Delete {name} gallery?</h1>
                 <img src={close} onClick={() => closeModal(false)} alt="" className='modal__container__close'/>
             </div>
     
             <div className="modal__container__body">
-                <p className='modal__container__text'>Please confirm that you'd like to delete the {name} from the list of document.
-                    You won't be able to undo this action.
+                <p className='modal__container__text'>Please confirm that you'd like to delete the {name} gallery from your list.
+                    This action cannot be undone.
                 </p>
             </div>
             <div className="modal__container__footer">

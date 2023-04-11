@@ -13,13 +13,14 @@ export default function ListToolBar() {
 
     return (
         <div className="list-tool-bar">
+            <h1 className="list-tool-bar__header">My Galleries</h1>
             <Link to='/gallery' className="list-tool-bar__create-button">
                 <img className="list-tool-bar__create-icon" src={createIcon} alt="create-icon"/>
                 <p className="list-tool-bar__create-text">CREATE</p>
             </Link>
-            <div className="list-tool-bar__sort-container">
+            {/* <div className="list-tool-bar__sort-container">
                 <img className="list-tool-bar__sort-icon" src={sortIcon} alt="sort-icon"/>
-            </div>
+            </div> */}
         </div>
     )
 }

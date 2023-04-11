@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import Map from '../../components/Map/Map';
 
+import '../GalleryPage/GalleryPage.scss'
 import './ViewPage.scss'
 import ViewImageItem from '../../components/ViewImageItem/ViewImageItem';
 
@@ -51,28 +52,39 @@ export default function ViewPage() {
     //Show select images when no id is provided
     if (images.length === 0) {
         return (
-            <div>
-                Loading Page
-            </div>
+            <div className="loader__container">
+                    <div className="loader__loader"></div>
+                    <p className="loader__text">Loading...</p>
+                </div>
         )
     }
 
     return (
-        <div>
-            <form ref={formRef}>
-                <input 
-                    placeholder="Enter a title for this project" 
-                    name="documentTitle" 
-                    id="documentTitle"
-                    value={document.title}
-                    onChange={handleInputChange}></input>
-                <textarea 
-                    placeholder="Enter a description for this project" name="documentDescription" 
-                    id="documentDescription"
-                    value={document.description}
-                    onChange={handleInputChange}></textarea>
-                <Map images={images}/>
-                <ViewImageItem images={images}/>
+        <div className="gallery">
+            <form className="gallery__content" ref={formRef}>
+                <div className="gallery__header-container">
+                    <input
+                        className="gallery__title"
+                        placeholder="Enter a title for this project"
+                        name="documentTitle"
+                        id="documentTitle"
+                        value={document.title}
+                        onChange={handleInputChange}></input>
+                    <textarea
+                        className="gallery__description"
+                        placeholder="Enter a description for this project" name="documentDescription"
+                        id="documentDescription"
+                        value={document.description}
+                        onChange={handleInputChange}></textarea>
+                </div>
+                <div className="gallery__map-image-container">
+                    <div className="gallery__map-container">
+                        <Map images={images}/>
+                    </div>
+                    <div className="gallery__image-list">
+                        <ViewImageItem images={images}/>
+                    </div>
+                </div>
             </form>
         </div>
     )

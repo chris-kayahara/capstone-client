@@ -14,7 +14,6 @@ const API_BASE_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:8080'
 export default function UserHomePage({ setIsUserLoggedIn }) {
     const [iat, setIat] = useState();
     
-
     const [documents, setDocuments] = useState([]);
     const [sortBy, setSortBy] = useState("updated_at");
     const [orderBy, setOrderBy] = useState("dec");
@@ -74,7 +73,7 @@ export default function UserHomePage({ setIsUserLoggedIn }) {
     // Create useEffect to run at load
     useEffect(() => {
         fetchDocuments();
-    });
+    }, []);
     useEffect(() => {
         fetchDocuments();
     }, [token]);
@@ -83,7 +82,10 @@ export default function UserHomePage({ setIsUserLoggedIn }) {
     }, [deleteDocument]);
 
     if (!iat) {
-        return <span>Loading user's profile...</span>;
+        return  <div className="loader__container">
+                    <div className="loader__loader"></div>
+                    <p className="loader__text">Loading...</p>
+                </div>;
     }
 
     const documentData = documents.reduce(function (r, a) {
@@ -103,15 +105,17 @@ export default function UserHomePage({ setIsUserLoggedIn }) {
             <div className="user-home-page__container">
                 <div className="user-home-page__content">
                     <ListToolBar handleSort={handleSort}/>
-                    {renderedDocuments.map((document, i) => { // Each document is an array of image objects
-                        return (<DocListCard 
-                                    key={i} 
-                                    document={document} 
-                                    documentId={(documentId) => getDocumentId(documentId)}
-                                    documentName={(documentName) => getDocumentName(documentName)}
-                                    modalValue={setDeleteDocument}
-                                    />)
-                    })}
+                    <div className="user-home-page__list">
+                        {renderedDocuments.map((document, i) => { // Each document is an array of image objects
+                            return (<DocListCard
+                                        key={i}
+                                        document={document}
+                                        documentId={(documentId) => getDocumentId(documentId)}
+                                        documentName={(documentName) => getDocumentName(documentName)}
+                                        modalValue={setDeleteDocument}
+                                        />)
+                        })}
+                    </div>
                 </div>
             </div>
             {deleteDocument && <DeleteDocumentModal closeModal={setDeleteDocument} id={documentId} name={documentName}  />}

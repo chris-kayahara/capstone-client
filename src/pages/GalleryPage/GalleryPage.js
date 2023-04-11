@@ -6,7 +6,10 @@ import axios from 'axios';
 import Map from '../../components/Map/Map';
 
 import './GalleryPage.scss'
+import './ImageSelect.scss'
+
 import ImageItem from '../../components/ImageItem/ImageItem';
+import uploadIcon from '../../assets/icons/upload.svg'
 const { v4: uuid } = require('uuid');
 
 const API_BASE_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:8080';
@@ -146,41 +149,63 @@ export default function GalleryPage() {
     //Show select images when no id is provided
     if (images.length === 0) {
         return (
-            <form  action='/images' >
-                <div>
-                    <p>Get started by selecting some photos to upload</p>
-                    <input
-                    className="create-page__file-input"
-                    name="uploadedImages"
-                    type='file'
-                    multiple
-                    onChange={selectImages}
-                    accept="image/*"></input>
+            <form  action='/images' className="image-select">
+                <div className="image-select__container">
+                    <h1 className="image-select__title">Select Images</h1>
+                    <div className="image-select__form">
+                        <p className="image-select__text">Get started creating your new gallery by selecting some photos to upload</p>
+                        <div className="image-select__upload-container">
+                            <div className="image-select__upload-button">
+                                <img className="image-select__upload-icon" src={uploadIcon} alt="upload icon"/>
+                                <label htmlFor='uploadedImages'                         className="image-select__file-input-label">Upload</label>
+                            </div>
+                            <input
+                            className="image-select__file-input"
+                            name="uploadedImages"
+                            id="uploadedImages"
+                            type='file'
+                            multiple
+                            onChange={selectImages}
+                            accept="image/*"></input>
+                        </div>
+                    </div>
+                    <button className="image-select__button" onClick={handleOnImageSelect}>Confirm</button>
+                    <Link to='/'><button className="image-select__cancel-button" >Cancel</button></Link>
                 </div>
-                <button onClick={handleOnImageSelect}>Confirm</button>
-                <Link to='/'><button>Cancel</button></Link>
             </form>
         )
     }
 
     return (
-        <div>
-            <form onSubmit={handleOnSubmit} ref={formRef}>
-                <input 
-                    placeholder="Enter a title for this project" 
-                    name="documentTitle" 
-                    id="documentTitle"
-                    value={document.title}
-                    onChange={handleInputChange}></input>
-                <textarea 
-                    placeholder="Enter a description for this project" name="documentDescription" 
-                    id="documentDescription"
-                    value={document.description}
-                    onChange={handleInputChange}></textarea>
-                <Map images={images}/>
-                <ImageItem images={images}/>
-                <button type="submit">Save</button>
-                <Link to='/'><button>Cancel</button></Link>
+        <div className="gallery">
+            <form  className="gallery__content" onSubmit={handleOnSubmit} ref={formRef}>
+                <div className="gallery__header-container">
+                    <input
+                        className="gallery__title"
+                        placeholder="Gallery Title"
+                        name="documentTitle"
+                        id="documentTitle"
+                        value={document.title}
+                        onChange={handleInputChange}></input>
+                    <textarea
+                        className="gallery__description"
+                        placeholder="Gallery description" name="documentDescription"
+                        id="documentDescription"
+                        value={document.description}
+                        onChange={handleInputChange}></textarea>
+                    <div className="gallery__button-container">
+                        <button className="gallery__save-button" type="submit">Save</button>
+                        <Link to='/'><button className="gallery__cancel-button">Cancel</button></Link>
+                    </div>
+                </div>
+                <div className="gallery__map-image-container">
+                    <div className="gallery__map-container">
+                        <Map images={images}/>
+                    </div>
+                    <div className="gallery__image-list">
+                        <ImageItem images={images}/>
+                    </div>
+                </div>
             </form>
         </div>
     )

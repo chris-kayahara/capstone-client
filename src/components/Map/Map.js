@@ -70,9 +70,6 @@ export default function Map(props) {
 
     return (
         <div>
-            <div className="sidebar">
-                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div>  
             <div ref={mapContainer} className="map-container" ></div>
         </div>
     );

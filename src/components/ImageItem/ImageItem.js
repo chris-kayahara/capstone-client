@@ -11,7 +11,7 @@ export default function ImageItem(props) {
 
 
     return (
-        <div>
+        <>
             {images.map((image, i) => {
                 return (
                     <article key={`image${i}`} className="image-item">
@@ -34,6 +34,6 @@ export default function ImageItem(props) {
                         </div>
                     </article>
             )})}
-        </div>
+        </>
     )
 }

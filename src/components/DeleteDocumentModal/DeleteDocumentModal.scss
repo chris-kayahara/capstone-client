@@ -72,12 +72,15 @@
         &__cancel-button {
           width: 100%;
           background-color: $white;
-          border: 1px solid $light-grey;
+          border: 1px solid $medium-color;
           border-radius: 4px;
           padding: 8px 16px;
           margin-right: 16px;
-          border-radius: 1.125rem;
+          border-radius: 4px;
           cursor: pointer;
+          color: $medium-color;
+          margin-top: 0;
+          margin-bottom: 0;
   
           @include tablet {
             width: auto;
@@ -89,12 +92,13 @@
   
         &__delete-button {
           width: 100%;
-          background-color: $red;
+          background-color: $medium-color;
           border: none;
-          border-radius: 4px;
           padding: 8px 16px;
           cursor: pointer;
-          border-radius: 1.125rem;
+          border-radius: 4px;
+          margin-top: 0;
+          margin-bottom: 0;
   
           @include tablet {
             width: auto;

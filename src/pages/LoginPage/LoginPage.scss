@@ -1,0 +1,73 @@
+@use "../../styles/partials/fonts";
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+
+.login {
+    margin: 0 auto;
+    padding: 2rem 1rem 1rem 1rem;
+    max-width: 38.75rem;
+    
+    &__content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__hero-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__hero-header{
+        margin-bottom: 2rem;
+    }
+
+    &__hero-text{
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    &__hero-image{
+        margin-bottom: 2rem;
+    }
+
+    &__form{
+        background-color: $white;
+        padding: 1rem;
+        border-radius: .25rem;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+    &__message {
+        color: $red;
+    }
+
+    &__button{
+        font-weight: 600;
+        font-size: 1rem;
+        border-radius: .25rem;
+        margin: 1rem 0;
+        width: 100%;
+    }
+
+    &__signup-text{
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+        text-align: center;
+    }
+
+    &__signup-link{
+        display: inline;
+        color: $medium-color;
+        text-align: center;
+        font-weight: 600;
+
+        &::after{
+            color: $medium-color;
+        }
+    }
+}

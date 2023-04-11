@@ -1,0 +1,116 @@
+@use "../../styles/partials/fonts";
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.gallery {
+    max-width: 71rem;
+    padding: 1rem;
+    margin: 0 auto;
+    height: 100%;
+
+    @include tablet {
+        padding: 1.5rem;
+    }
+
+    &__content{
+        height: 100%;
+        background-color: $white;
+        padding: 1rem;
+        border-radius: 4px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        display: flex;
+        flex-direction: column;
+
+        @include desktop{
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+    }
+
+    &__header-container {
+        @include desktop {
+            margin-left: 1.5rem;
+            position: sticky;
+            position: -webkit-sticky;
+            top: 1rem;
+            height: 20rem;
+            min-width: 16rem;
+        }
+    }
+
+    &__description{
+        @include desktop {
+            height: 20rem;
+            margin-bottom: 1.3rem;
+        }
+    }
+
+    &__button-container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom:1rem;
+    }
+
+    &__save-button{
+        margin: 0;
+        cursor: pointer;
+    }
+
+    &__cancel-button{
+        margin-top: .75rem;
+        margin-bottom: 0;
+        font-weight: 400;
+        font-size: 1rem;
+        width: 100%;
+        background-color: $white;
+        color: $medium-color;
+        border: $medium-color 1px solid;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        &:hover{
+            background-color: $dark-color-pale;
+        }
+    }
+
+    &__title{
+        font-size: 2rem;
+        font-weight: 700;
+
+        &:not(:placeholder-shown) {
+            box-shadow: none;
+            border: none;
+          }
+
+        @include desktop{
+            margin-top: 0;
+        }
+    }
+
+    &__map-image-container{
+    }
+
+    &__map-container{
+        overflow: hidden;
+        border-radius: 4px;
+        border: 1px solid rgba(99, 99, 99, 0.3);
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        margin-bottom: 1rem;
+
+        @include desktop {
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    &__image-list{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        @include tablet {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    }
+}
